@@ -1,8 +1,12 @@
 import express from "express";
 
+import Task from "./Task.js";
+
 const router = express.Router();
 
 router.get("/", (req, res) => {
+  const tasks = Task.getAllTasks();
+
   res.send(`<!DOCTYPE html>
 <html lang="en" dir="rtl" >
   <head>
@@ -49,26 +53,28 @@ router.get("/", (req, res) => {
       </div>
       <div class="row mb-4">
         <div class="col">
-          <ul class="list-group lh-lg p-0">
-            <li class="list-group-item d-flex bg-light">
-              <span class="flex-grow-1 d-flex align-items-center">
-                <label for="">This is a test title</label>
-                <span class="badge bg-success ms-auto me-3 user-select-none"> Completed </span>
-              </span>
-              <button class="btn btn-sm btn-secondary me-3 toggle-btn">Toggle</button>
-              <button class="btn btn-sm btn-primary me-3 edit-btn">Edit</button>
-              <button class="btn btn-sm btn-danger me-3 delete-btn">Delete</button>
-            </li>
+          <ul class="list-group lh-lg p-0" style='direction: ltr;'>
+         ${tasks
+           .map(
+             (task, index) => `
+             <li class="list-group-item d-flex bg-light" key="${task.id}">
+      <span class="flex-grow-1 d-flex align-items-center  justify-content-between">
+        <label >${task.title}</label>
+        <span class="badge ${
+          task.completed ? "bg-success" : "bg-secondary"
+        } mr-auto me-3 user-select-none"> ${task.completed ? "Completed" : "In progress"} </span>
+      </span>
 
-            <li class="list-group-item d-flex bg-light">
-              <span class="flex-grow-1 d-flex align-items-center">
-                <label for="">This is a test title</label>
-                <span class="badge bg-success ms-auto me-3 user-select-none"> IN progress </span>
-              </span>
-              <button class="btn btn-sm btn-secondary me-3 toggle-btn">Toggle</button>
-              <button class="btn btn-sm btn-primary me-3 edit-btn">Edit</button>
-              <button class="btn btn-sm btn-danger me-3 delete-btn">Delete</button>
-            </li>
+      <button class="btn btn-sm  ${
+        task.completed ? "btn-secondary" : "btn-success"
+      }  me-3 toggle-btn">Toggle</button>
+      <button class="btn btn-sm btn-primary me-3 edit-btn">Edit</button>
+      <button class="btn btn-sm btn-danger me-3 delete-btn">Delete</button>
+    </li>
+  `
+           )
+           .join("")}
+           
           </ul>
         </div>
       </div>
