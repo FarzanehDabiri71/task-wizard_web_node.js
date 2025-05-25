@@ -7,5 +7,6 @@ html {
 }
 
 form {
-  background-color: #e5e5e5;
+  background-color: #e6e4e4;
+  direction: rtl;
 }
