@@ -16,7 +16,7 @@ router.get("/", (req, res) => {
     <link rel="stylesheet" href="css/bootstrap.css" />
     <link rel="stylesheet" href="css/style.css" />
 
-    <title>Document</title>
+    <title>Task Manager</title>
   </head>
   <body>
     <div class="container">
@@ -62,7 +62,9 @@ router.get("/", (req, res) => {
         <label >${task.title}</label>
         <span class="badge ${
           task.completed ? "bg-success" : "bg-secondary"
-        } mr-auto me-3 user-select-none"> ${task.completed ? "Completed" : "In progress"} </span>
+        } mr-auto me-3 user-select-none p-2"> ${
+               task.completed ? "Completed" : "In progress"
+             } </span>
       </span>
 
       <button class="btn btn-sm  ${
@@ -79,9 +81,12 @@ router.get("/", (req, res) => {
         </div>
       </div>
     </div>
+    <script src="js/axios.min.js"></script>
+    <script src="js/scripts.js"></script>
   </body>
 </html>
 `);
 });
 
 export default router;
+// <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
