@@ -81,8 +81,9 @@ router.get("/", (req, res) => {
         </div>
       </div>
     </div>
-    <script src="js/axios.min.js"></script>
-    <script src="js/scripts.js"></script>
+
+    <script src="/js/axios.min.js"></script>
+    <script src="/js/scripts.js"></script>
   </body>
 </html>
 `);
