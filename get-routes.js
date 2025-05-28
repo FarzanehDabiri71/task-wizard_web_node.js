@@ -8,7 +8,7 @@ router.get("/", (req, res) => {
   const tasks = Task.getAllTasks();
 
   res.send(`<!DOCTYPE html>
-<html lang="en" dir="rtl" >
+<html lang="en" >
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -27,14 +27,14 @@ router.get("/", (req, res) => {
       </div>
       <div class="row mb-4">
         <div class="col">
-          <form id="taskForm" action="/add-task" method="POST" class="p-2 rounded-3 border">
-            <div class="input-group input-group-lg">
+          <form id="taskForm" action="/add-task" method="POST" class="p-2 rounded-2  border">
+            <div class="input-group input-group-lg rounded-2 overflow-hidden" style="direction:ltr">
               <input
                 type="text"
-                class="form-control shadow-none"
+                class="form-control shadow-none rounded-0"
                 name="title"
                 placeholder="Enter a new title" />
-              <button type="submit" class="btn btn-primary">Add new Task</button>
+              <button type="submit" class="btn btn-primary rounded-0">Add new Task</button>
             </div>
             <div class="form-check mt-1 mb-0" style="display: flex; align-items: center; justify-content: flex-start; direction: ltr;">
             <input
