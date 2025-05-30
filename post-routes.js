@@ -35,4 +35,24 @@ router.post("/toggle-task", (req, res) => {
   }
 });
 
+router.post("/edit-task", (req, res) => {
+  if (req.body.id && req.body.title) {
+    console.log(req.body);
+    const task = Task.getTaskById(req.body.id);
+    if (task) {
+      try {
+        task.title = req.body.title;
+        task.save();
+        res.json(true);
+      } catch (error) {
+        res.status(400).json(error.message);
+      }
+    } else {
+      res.status(400).json("Invalid request.");
+    }
+  } else {
+    res.status(400).json("Task not found.");
+  }
+});
+
 export default router;
