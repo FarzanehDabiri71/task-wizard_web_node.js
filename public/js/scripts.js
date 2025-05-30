@@ -16,5 +16,23 @@ list.addEventListener("click", async (event) => {
     } catch (error) {
       alert(e.response.data);
     }
+  } else if (target.classList.contains("edit-btn")) {
+    const text = target.parentElement.querySelector("label").innerText;
+    const answer = prompt("Please enter new title: ", text);
+    if (answer && answer.length > 3) {
+      try {
+        const response = await axios.post("/edit-task", { id, title: answer });
+        if (response.data === true) {
+          location.reload();
+        } else {
+          alert(response.data);
+        }
+      } catch (error) {
+        alert(error.response.data);
+      }
+    } else if (answer) {
+      // cancel رو شامل نمیشه
+      alert("Please enter at least 3 characters.");
+    }
   }
 });
