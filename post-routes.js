@@ -1,5 +1,6 @@
 import express from "express";
 import Task from "./Task.js";
+import DB from "./db.js";
 
 const router = express.Router();
 
@@ -55,4 +56,19 @@ router.post("/edit-task", (req, res) => {
   }
 });
 
+router.post("/delete-task", (req, res) => {
+  if (req.body.id) {
+    try {
+      if (DB.deleteTask(req.body.id)) {
+        res.json(true);
+      } else {
+        res.status(404).json("Task not found.");
+      }
+    } catch (error) {
+      res.status(500).json("Server error.");
+    }
+  } else {
+    res.status(400).json("Invalid request.");
+  }
+});
 export default router;
