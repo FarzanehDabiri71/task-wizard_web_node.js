@@ -18,4 +18,21 @@ router.post("/add-task", (req, res, next) => {
     res.status(400).send(`<h1>Invalid Request</h1><p>Title is required.</p>`);
   }
 });
+
+router.post("/toggle-task", (req, res) => {
+  if (req.body.id) {
+    const task = Task.getTaskById(req.body.id);
+    if (task) {
+      // console.log(task);
+      task.completed = !task.completed;
+      task.save();
+      res.json(true);
+    } else {
+      res.status(404).json(404);
+    }
+  } else {
+    res.status(400).json(400);
+  }
+});
+
 export default router;
