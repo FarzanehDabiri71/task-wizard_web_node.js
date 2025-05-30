@@ -57,14 +57,16 @@ router.get("/", (req, res) => {
          ${tasks
            .map(
              (task, index) => `
-             <li class="list-group-item d-flex bg-light" key="${task.id}">
+             <li class="list-group-item d-flex bg-light" key="${task.id}"  data-id="${task.id}">
       <span class="flex-grow-1 d-flex align-items-center  justify-content-between">
         <label >${task.title}</label>
+        
         <span class="badge ${
           task.completed ? "bg-success" : "bg-secondary"
-        } mr-auto me-3 user-select-none p-2"> ${
-               task.completed ? "Completed" : "In progress"
-             } </span>
+        } mr-auto me-3 user-select-none p-2"> 
+        
+        ${task.completed ? "Completed" : "In progress"} </span>
+
       </span>
 
       <button class="btn btn-sm  ${
